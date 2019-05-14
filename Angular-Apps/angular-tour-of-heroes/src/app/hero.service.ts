@@ -6,11 +6,20 @@ import { MessageService } from './message.service';
 
 import { catchError, map, tap } from 'rxjs/operators';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class HeroService {
   private heroesUrl = 'api/heroes';
+
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService) {}
 
   getHeroes(): Observable<Hero[]>{
     this.messageService.add('HeroService: fetched heroes');
@@ -24,19 +33,23 @@ export class HeroService {
   getHero(id: number): Observable<Hero>{
     const url = '$(this.heroesUrl)/${id}';
     return this.http.get<Hero>(url).pipe(
+      /** 404 if id is not found */
       tap(_=> this.log('fetched heroes id=${id}')),
         catchError(this.handleError<Hero>('getHero id=${id}'))
     );
+  }
+
+  updateHero(hero : Hero): Observable<any>{
+    return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
+      tap(_=> this.log('updated heroes id=${id}')),
+        catchError(this.handleError<any>('updateHero'))
+    )
   }
 
   /** Log HeroService message with MessageService */
   private log(message: string){
     this.messageService.add('HeroService: ${message}');
   }
-
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
 
   /**
    * Handle Http operation that failed.
