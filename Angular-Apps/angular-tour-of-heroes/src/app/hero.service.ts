@@ -22,26 +22,25 @@ export class HeroService {
     private messageService: MessageService) {}
 
   getHeroes(): Observable<Hero[]>{
-    this.messageService.add('HeroService: fetched heroes');
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
-        tap(_=> this.log('fetched heroes')),
-        catchError(this.handleError<Hero[]>('getHeroes, []'))
+        tap(_ => this.log(`fetched heroes`)),
+        catchError(this.handleError<Hero[]>('getHeroes', []))
       );
   }
 
   getHero(id: number): Observable<Hero>{
-    const url = '$(this.heroesUrl)/${id}';
+    const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
       /** 404 if id is not found */
-      tap(_=> this.log('fetched heroes id=${id}')),
+      tap(_ => this.log(`fetched hero id=${id}`)),
         catchError(this.handleError<Hero>('getHero id=${id}'))
     );
   }
 
   updateHero(hero : Hero): Observable<any>{
     return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
-      tap(_=> this.log('updated heroes id=${id}')),
+      tap(_ => this.log(`updated heroes id=${hero.id}`)),
         catchError(this.handleError<any>('updateHero'))
     )
   }
@@ -56,10 +55,10 @@ export class HeroService {
 
   deleteHero(hero: Hero | number): Observable<Hero>{
     const id = typeof hero === 'number' ? hero: hero.id;
-    const url = '$(this.heroesUrl)/${id}';
+    const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, httpOptions).pipe(
-      tap(_=> this.log('deleted hero id=${id}')),
+      tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
     )
   }
@@ -71,14 +70,14 @@ export class HeroService {
       return of([]);
     }
     return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-      tap(_=> this.log(`found heroes matching "${term}"`)),
+      tap(_ => this.log(`found heroes matching "${term}"`)),
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
   }
 
   /** Log HeroService message with MessageService */
   private log(message: string){
-    this.messageService.add('HeroService: ${message}');
+    this.messageService.add(`HeroService: ${message}`);
   }
 
   /**
