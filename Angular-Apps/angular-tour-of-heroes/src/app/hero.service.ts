@@ -70,13 +70,12 @@ export class HeroService {
       //return empty array if search term does not match any heroes
       return of([]);
     }
-    return this.http.get<Hero[]>('${this.heroesUrl}/?name=${term}')
-      .pipe(
-        tap(_=> this.log('found heroes matching ${term}')),
-        catchError(this.handleError<Hero[]>('searchHeroes, []'))
-      )
+    return this.http.get<Hero[]>('${this.heroesUrl}/?name=${term}').pipe(
+      tap(_=> this.log('found heroes matching ${term}')),
+      catchError(this.handleError<Hero[]>('searchHeroes, []'))
+    )
   }
-  
+
   /** Log HeroService message with MessageService */
   private log(message: string){
     this.messageService.add('HeroService: ${message}');
