@@ -9,13 +9,7 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  selectedHero: Hero;
   heroes: Hero[];
-
-  
-  onSelect(hero: Hero): void{
-    this.selectedHero = hero;
-  }
 
   //subscribe method allows service to actually wait for server to make requests
   getHeroes(): void{
