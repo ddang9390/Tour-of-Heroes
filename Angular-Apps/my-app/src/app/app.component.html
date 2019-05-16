@@ -11,5 +11,6 @@
 <input [(ngModel)]="username">
 <p>The username is {{username}}</p>
 <button class="btn btn-primary" [disabled]="!isUserEmpty()" (click)="resetUser()">Reset User</button>
-
+<h3>Alternate button</h3>
+<button class="btn btn-primary" [disabled]="username === ''" (click)="username = ''">Reset User</button>
 <router-outlet></router-outlet>
