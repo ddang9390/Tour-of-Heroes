@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  name="Daniel";
+  username="";
+  allowClick = false;
+
+  isUserEmpty(): boolean{
+    if(this.username == ""){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  resetUser(){
+    this.username = "";
+  }
 }

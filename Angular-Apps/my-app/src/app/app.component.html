@@ -1,11 +1,15 @@
-<input [(ngModel)]="name">
-<h1>{{name}}</h1>
-
 <h1>Component Generation</h1>
+<h2>Assignment 1</h2>
 <app-warning-alert></app-warning-alert>
 <app-success-alert></app-success-alert>
 
+<br>
 <h1>Data Binding</h1>
 <app-servers></app-servers>
+
+<h2>Assignment 2</h2>
+<input [(ngModel)]="username">
+<p>The username is {{username}}</p>
+<button class="btn btn-primary" [disabled]="!isUserEmpty()" (click)="resetUser()">Reset User</button>
 
 <router-outlet></router-outlet>
