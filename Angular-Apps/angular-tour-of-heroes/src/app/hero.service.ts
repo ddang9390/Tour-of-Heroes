@@ -34,7 +34,7 @@ export class HeroService {
     return this.http.get<Hero>(url).pipe(
       /** 404 if id is not found */
       tap(_ => this.log(`fetched hero id=${id}`)),
-        catchError(this.handleError<Hero>('getHero id=${id}'))
+        catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
 
