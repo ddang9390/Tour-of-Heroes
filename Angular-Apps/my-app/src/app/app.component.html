@@ -13,4 +13,12 @@
 <button class="btn btn-primary" [disabled]="!isUserEmpty()" (click)="resetUser()">Reset User</button>
 <h3>Alternate button</h3>
 <button class="btn btn-primary" [disabled]="username === ''" (click)="username = ''">Reset User</button>
+
+<h2>Assignment 3 - Directives</h2>
+<button class="btn btn-primary" (click)="press()">Display Details</button>
+<p *ngIf="clicked">Secret password = tune</p>
+<h3>Incrementing Numbers</h3>
+<button class="btn btn-primary" (click)="addToLog()">Add</button>
+<p *ngFor="let l of log">{{l}}</p>
+
 <router-outlet></router-outlet>

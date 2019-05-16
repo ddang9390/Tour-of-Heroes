@@ -9,6 +9,9 @@ export class AppComponent {
   username="";
   allowClick = false;
 
+  clicked = false;
+  log = [];
+  num = 0;
   isUserEmpty(): boolean{
     if(this.username == ""){
       return false;
@@ -20,5 +23,13 @@ export class AppComponent {
 
   resetUser(){
     this.username = "";
+  }
+
+  press(){
+    this.clicked = !this.clicked;
+  }
+  addToLog(){
+    this.log.push(this.num);
+    this.num++;
   }
 }
