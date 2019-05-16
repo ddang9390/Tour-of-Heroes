@@ -19,6 +19,8 @@
 <p *ngIf="clicked">Secret password = tune</p>
 <h3>Incrementing Numbers</h3>
 <button class="btn btn-primary" (click)="addToLog()">Add</button>
-<p *ngFor="let l of log">{{l}}</p>
+<p *ngFor="let l of log" 
+    [ngStyle]="{backgroundColor: (l%2) == 0 ? 'blue' : 'red',
+                color: 'white'}">{{l}}</p>
 
 <router-outlet></router-outlet>
